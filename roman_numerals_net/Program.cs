@@ -12,10 +12,7 @@ namespace roman_numerals_net
             switch (curr)
             {
                 case 'I':
-                    if (next != ' ' && next != 'I')
-                        return -1; //so that we are 1 less than the 2nd number
-                    else
-                        return 1;
+                    return (next != ' ' && next != 'I') ? -1 : 1; //cool
                     break;
                 case 'V':
                     return 5;
@@ -40,10 +37,13 @@ namespace roman_numerals_net
             string roman_num = Console.ReadLine();
 
             int total_value = 0; //this is int this time so we can do -1 and not mess stuff up severely
-            for (uint i = 0; i < roman_num.Length; i++)
+            int string_size = roman_num.Length;
+            for (uint i = 0; i < string_size; i++)
             {
-                char curr_char = roman_num.ToCharArray()[i];
-                char next_char = (i == roman_num.Length - 1) ? ' ' : roman_num.ToCharArray()[i + 1]; //won't let me use null, need to use ' '
+                char[] char_array = roman_num.ToCharArray();
+
+                char curr_char = char_array[i];
+                char next_char = (i == string_size - 1) ? ' ' : char_array[i + 1]; //won't let me use null, need to use ' '
 
                 total_value += from_roman(curr_char, next_char);
             }

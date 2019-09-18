@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,25 +7,32 @@ namespace roman_numerals_net
 {
     class Program
     {
+
         private static int from_roman(char curr, char next)
         {
+          IDictionary<char, int> dict = new Dictionary<char,int>()
+          {
+            {'V', 5},
+            {'X', 10},
+            {'L', 50},
+            {'C', 100}
+          };
+
             switch (curr)
             {
                 case 'I':
-                    return (next != ' ' && next != 'I') ? -1 : 1; //cool
+                    return (next != ' ' && next != 'I') ? -1 : 1; //I is special case because can be +- 1
                     break;
-                case 'V':
-                    return 5;
-                    break;
-                case 'X':
-                    return 10;
-                    break;
-                case 'L':
-                    return 50;
-                    break;
-                case 'C':
-                    return 100;
-                    break;
+                default:
+                try
+                {
+                  return dict[curr];
+                }
+                catch
+                {
+                  Console.WriteLine("Unknown letter: {0}", curr);
+                }
+                break;
             }
 
             return 0;
